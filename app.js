@@ -59,9 +59,8 @@ app.use('/*', errorRouter);
 app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors()); // обработчик ошибок celebrate
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   const { name, statusCode = 500, message } = err;
-
   if (name === 'ValidationError') {
     res.status(400).send({ message });
   }
