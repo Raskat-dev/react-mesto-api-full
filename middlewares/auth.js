@@ -13,6 +13,5 @@ module.exports = (req, res, next) => {
   }
 
   req.user = payload;
-  //! проверка req.user для защиты раутов постановки лайка\удаления карточки\редактирования
   next();
 };

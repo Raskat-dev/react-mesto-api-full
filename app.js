@@ -65,8 +65,8 @@ app.use((err, req, res) => {
   if (name === 'ValidationError') {
     res.status(400).send({ message });
   }
-  if (statusCode === 11000) {
-    res.status(401).send({ message: 'Такой email уже зарегестрирован' });
+  if (name === 'MongoError') {
+    res.status(409).send({ message: 'Такой email уже зарегестрирован' });
   } else {
     res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
   }
