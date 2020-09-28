@@ -1,0 +1,40 @@
+{
+  "name": "express-mesto",
+  "description": "Проект express-mesto представляет собой сервер на express для проекта mesto-react.",
+  "author": "Rostislav Katyuzhanskii",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yandex-praktikum/express-mesto.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yandex-praktikum/express-mesto/issues"
+  },
+  "homepage": "https://github.com/yandex-praktikum/express-mesto#readme",
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.3",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-winston": "^4.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.1",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
+  }
+}
