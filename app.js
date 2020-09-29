@@ -71,6 +71,4 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Загружаем порт ${PORT}`);
-});
+app.listen(PORT);

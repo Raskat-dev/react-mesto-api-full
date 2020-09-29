@@ -78,7 +78,7 @@ module.exports.login = (req, res, next) => {
         expiresIn: '7d',
       });
       res.cookie('token', token, { httpOnly: true, sameSite: true });
-      res.send(user);
+      res.send({ token });
     })
     .catch(next);
 };
