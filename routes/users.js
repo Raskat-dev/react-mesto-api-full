@@ -1,6 +1,5 @@
 const userRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const cors = require('cors');
 const {
   getUsers, getUser, editUser, editUserAvatar,
 } = require('../controllers/users');
