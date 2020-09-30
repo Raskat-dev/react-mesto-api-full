@@ -9,19 +9,17 @@ const corsOptions = {
   origin: ['http://raskat.students.nomoreparties.co/', 'https://raskat.students.nomoreparties.co/'],
 };
 
-userRouter.use(cors(corsOptions));
-
-userRouter.options('/', cors());
+userRouter.options('/', cors(corsOptions));
 userRouter.get('/', getUsers);
 
-userRouter.options('/:_id', cors());
+userRouter.options('/:_id', cors(corsOptions));
 userRouter.get('/:_id', celebrate({
   params: Joi.object().keys({
     _id: Joi.string().required().hex(),
   }),
 }), getUser);
 
-userRouter.options('/me', cors());
+userRouter.options('/me', cors(corsOptions));
 userRouter.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -29,7 +27,7 @@ userRouter.patch('/me', celebrate({
   }).unknown(true),
 }), editUser);
 
-userRouter.options('/me/avatar', cors());
+userRouter.options('/me/avatar', cors(corsOptions));
 userRouter.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().pattern(new RegExp('^((http|https):\/\/)(www\.)?([\w\W]){1,}(#?)$')),
