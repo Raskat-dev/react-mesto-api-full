@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const errorRouter = require('./routes/error');
 const { login, createUser } = require('./controllers/users');
@@ -12,6 +13,10 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+const corsOptions = {
+  origin: 'http://raskat.students.nomoreparties.co/',
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,11 +36,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger); // подключаем логгер запросов
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+app.use(cors(corsOptions));
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
