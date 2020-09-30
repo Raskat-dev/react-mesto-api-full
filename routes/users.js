@@ -5,11 +5,6 @@ const {
   getUsers, getUser, editUser, editUserAvatar,
 } = require('../controllers/users');
 
-const corsOptions = {
-  origin: ['http://raskat.students.nomoreparties.co/', 'https://raskat.students.nomoreparties.co/'],
-};
-
-userRouter.use(cors());
 userRouter.get('/', getUsers);
 userRouter.get('/:_id', celebrate({
   params: Joi.object().keys({
