@@ -39,12 +39,13 @@ app.post('/signin', celebrate({
   }),
 }), login);
 app.options('/signup', cors());
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(6),
-  }).unknown(true),
-}), createUser);
+app.post('/signup', cors(), createUser);
+// celebrate({
+//   body: Joi.object().keys({
+//     email: Joi.string().required().email(),
+//     password: Joi.string().required().min(6),
+//   }).unknown(true),
+// })
 
 app.use('/users', auth, require('./routes/users'));
 
