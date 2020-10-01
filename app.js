@@ -13,7 +13,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const corsOptions = {
-  origin: /hhttps?:\/\/(www\.)?raskat\.students\.nomoreparties\.co\/([a-zA-Z0-9]{1,})?/,
+  origin: /https?:\/\/(www\.)?raskat\.students\.nomoreparties\.co\/([a-zA-Z0-9]{1,})?/,
 };
 
 const app = express();
