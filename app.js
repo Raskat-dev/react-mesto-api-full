@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -30,6 +31,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger); // подключаем логгер запросов
+
+app.use(cors({ origin: true }));
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
