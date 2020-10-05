@@ -24,21 +24,22 @@ module.exports.getUser = (req, res, next) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  if (mongoose.Types.ObjectId.isValid(req.params._id)) {
-    User.findOne({ _id: req.users._id })
-      .orFail(new NotFoundError('Нет пользователя с таким id'))
-      .then((user) => res.send(user))
-      .catch(next);
-  } else {
-    res.status(404).send({ message: 'Нет пользователя с таким id' });
-  }
+  User.findOne({ _id: req.users._id })
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .then((user) => res.send(user))
+    .catch(next);
 };
 
 module.exports.createUser = (req, res, next) => {
   const {
-    name = 'Жак-Ив Кусто', about = 'Исследователь океана', avatar = 'https://kaskad.tv/images/2020/foto_zhak_iv_kusto__-_interesnie_fakti_20190810_2078596433.jpg', email, password,
+    name = 'Жак-Ив Кусто',
+    about = 'Исследователь океана',
+    avatar = 'https://kaskad.tv/images/2020/foto_zhak_iv_kusto__-_interesnie_fakti_20190810_2078596433.jpg',
+    email,
+    password,
   } = req.body;
-  bcrypt.hash(password, 10)
+  bcrypt
+    .hash(password, 10)
     .then((hash) => User.create({
       name,
       about,
