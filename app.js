@@ -36,7 +36,6 @@ app.options('*', cors({
   origin: ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credential: true,
-  preflightContinue: true,
   optionsSuccessStatus: 204,
 }));
 
