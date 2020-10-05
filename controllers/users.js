@@ -24,7 +24,7 @@ module.exports.getUser = (req, res, next) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  User.findOne({ _id: req.users._id })
+  User.findOne({ _id: req.user._id })
     .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => res.send(user))
     .catch(next);
