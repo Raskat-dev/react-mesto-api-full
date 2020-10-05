@@ -32,6 +32,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger); // подключаем логгер запросов
 
+app.use(cors({ origin: true }));
+
 app.options('*', cors({
   origin: ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
