@@ -64,11 +64,8 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
-app.use('/users', require('./routes/users'));
-
-// auth
-
-app.use('/cards', require('./routes/cards'));
+app.use('/users', auth, require('./routes/users'));
+app.use('/cards', auth, require('./routes/cards'));
 
 app.use('/*', errorRouter);
 
