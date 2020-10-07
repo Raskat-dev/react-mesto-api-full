@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
 const errorRouter = require('./routes/error');
 const { login, createUser } = require('./controllers/users');
-const { auth } = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -32,7 +32,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger); // подключаем логгер запросов
-// app.use(helmet()); // для простановки security-заголовков для API
+app.use(helmet()); // для простановки security-заголовков для API
 // const whitelist = ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'];
 // const corsOptions = {
 //   origin(origin, callback) {
