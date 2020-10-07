@@ -43,7 +43,7 @@ app.use(helmet()); // для простановки security-заголовко�
 //     }
 //   },
 // };
-app.use(cors({ origin: true }));
+app.use(cors());
 
 app.options('*', cors({
   origin: true,
