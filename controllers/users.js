@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const NotFoundError = require('../middlewares/errors/not-found-err.js');
 
-const { JWT_SECRET = 'super-secret-key' } = process.env;
+const JWT_SECRET = 'super-secret-key';
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
