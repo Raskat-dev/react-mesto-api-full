@@ -4,6 +4,7 @@ const NotFoundError = require('../middlewares/errors/not-found-err.js');
 // 1. Возврат всех карточек
 module.exports.getCards = (req, res, next) => {
   Card.find({})
+    .populate('owner')
     .then((cards) => res.send(cards))
     .catch(next);
 };
@@ -12,7 +13,6 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const ownerId = req.user._id;
   Card.create({ name, link, owner: ownerId })
-    .populate('owner')
     .then((card) => res.send(card))
     .catch(next);
 };
