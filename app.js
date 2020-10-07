@@ -45,7 +45,7 @@ app.use(requestLogger); // подключаем логгер запросов
 app.use(cors());
 
 app.options('*', cors({
-  origin: ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'],
+  origin: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credential: true,
   optionsSuccessStatus: 204,
