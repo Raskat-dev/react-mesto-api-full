@@ -32,7 +32,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger); // подключаем логгер запросов
-app.use(helmet()); // для простановки security-заголовков для API
+// app.use(helmet()); // для простановки security-заголовков для API
 // const whitelist = ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'];
 // const corsOptions = {
 //   origin(origin, callback) {
