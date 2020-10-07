@@ -8,7 +8,7 @@ cardRouter.get('/', getCards);
 cardRouter.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(1).max(30),
-    link: Joi.string().required().pattern(new RegExp('^((http|https):\/\/)(www\.)?([\w\W]){1,}(#?)$')),
+    link: Joi.string().required().regex(/^((http|https):\/\/)(www\.)?([\w\W]){1,}(#?)$/),
   }).unknown(true),
 }), createCard);
 cardRouter.delete('/:cardId', celebrate({
