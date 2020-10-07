@@ -45,12 +45,12 @@ app.use(helmet()); // для простановки security-заголовко�
 // };
 app.use(cors({ origin: true }));
 
-app.options('*', cors({
-  origin: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credential: true,
-  optionsSuccessStatus: 204,
-}));
+// app.options('*', cors({
+//   origin: true,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credential: true,
+//   optionsSuccessStatus: 204,
+// }));
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
