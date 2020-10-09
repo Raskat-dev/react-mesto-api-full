@@ -65,7 +65,14 @@ module.exports.getUser = (req, res, next) => {
     res.status(404).send({ message: 'Нет пользователя с таким id' });
   }
 };
-// 5. Обновление имени и статуса пользователя
+// 5. Возврат данных текущего пользователя
+module.exports.getUserMe = (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .then((user) => res.send(user))
+    .catch(next);
+};
+// 6. Обновление имени и статуса пользователя
 module.exports.editUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findOneAndUpdate(
@@ -77,7 +84,7 @@ module.exports.editUser = (req, res, next) => {
     .then((user) => res.send(user))
     .catch(next);
 };
-// 6. Обновление аватара пользователя
+// 7. Обновление аватара пользователя
 module.exports.editUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findOneAndUpdate(
