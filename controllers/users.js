@@ -42,10 +42,9 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
         expiresIn: '7d',
       });
+      const id = user._id;
       // res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true });
-      res.send({ token });
-      const payload = jwt.verify(token, JWT_SECRET);
-      req.user = payload;
+      res.send({ token, id });
     })
     .catch(next);
 };
@@ -66,14 +65,7 @@ module.exports.getUser = (req, res, next) => {
     res.status(404).send({ message: 'Нет пользователя с таким id' });
   }
 };
-// 5. Возврат данных текущего пользователя
-module.exports.getUserMe = (req, res, next) => {
-  User.findOne({ _id: req.user._id })
-    .orFail(new NotFoundError('Нет пользователя с таким id'))
-    .then((user) => res.send(user))
-    .catch(next);
-};
-// 6. Обновление имени и статуса пользователя
+// 5. Обновление имени и статуса пользователя
 module.exports.editUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findOneAndUpdate(
@@ -85,7 +77,7 @@ module.exports.editUser = (req, res, next) => {
     .then((user) => res.send(user))
     .catch(next);
 };
-// 7. Обновление аватара пользователя
+// 6. Обновление аватара пользователя
 module.exports.editUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findOneAndUpdate(
