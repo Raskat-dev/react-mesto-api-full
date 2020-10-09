@@ -42,8 +42,10 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
         expiresIn: '7d',
       });
-      res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true });
+      // res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true });
       res.send({ token });
+      const payload = jwt.verify(token, JWT_SECRET);
+      req.user = payload;
     })
     .catch(next);
 };

@@ -6,17 +6,6 @@ const JWT_SECRET = 'super-secret-key';
 const extractBearerToken = (header) => header.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
-  // const token = req.cookies.jwt;
-
-  // let payload;
-  // try {
-  //   payload = jwt.verify(token, JWT_SECRET);
-  // } catch (err) {
-  //   throw new AuthorizationError('Необходима авторизация');
-  // }
-
-  // req.user = payload;
-  // next();
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {

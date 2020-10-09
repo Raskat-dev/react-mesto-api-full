@@ -4,7 +4,6 @@ const NotFoundError = require('../middlewares/errors/not-found-err.js');
 // 1. Возврат всех карточек
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .populate('owner')
     .then((cards) => res.send(cards))
     .catch(next);
 };
@@ -13,7 +12,6 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const ownerId = req.user._id;
   Card.create({ name, link, owner: ownerId })
-    .populate('owner')
     .then((card) => res.send(card))
     .catch(next);
 };
@@ -29,7 +27,6 @@ module.exports.likeCard = (req, res, next) => {
   Card.findOneAndUpdate({ _id: req.params.cardId },
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true })
-    .populate('owner')
     .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => res.send(card))
     .catch(next);
@@ -39,7 +36,6 @@ module.exports.dislikeCard = (req, res, next) => {
   Card.findOneAndUpdate({ _id: req.params.cardId },
     { $pull: { likes: req.user._id } }, // убрать _id из массива
     { new: true })
-    .populate('owner')
     .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => res.send(card))
     .catch(next);
