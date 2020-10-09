@@ -18,12 +18,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message:
-    'Слишком много запросов в вашего IP, попробуйте снова спустя 15 минут',
-}));
+// app.use(rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limit each IP to 100 requests per windowMs
+//   message:
+//     'Слишком много запросов в вашего IP, попробуйте снова спустя 15 минут',
+// }));
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
