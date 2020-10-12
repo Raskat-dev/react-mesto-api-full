@@ -18,12 +18,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-// app.use(rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 100, // limit each IP to 100 requests per windowMs
-//   message:
-//     'Слишком много запросов в вашего IP, попробуйте снова спустя 15 минут',
-// }));
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message:
+    'Слишком много запросов в вашего IP, попробуйте снова спустя 15 минут',
+}));
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -33,17 +33,17 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger); // подключаем логгер запросов
 app.use(helmet()); // для простановки security-заголовков для API
-// const whitelist = ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'];
-// const corsOptions = {
-//   origin(origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
-app.use(cors());
+const whitelist = ['https://raskat.students.nomoreparties.co', 'http://raskat.students.nomoreparties.co', 'https://www.raskat.students.nomoreparties.co', 'http://www.raskat.students.nomoreparties.co'];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 
 app.options('*', cors({
   origin: true,
